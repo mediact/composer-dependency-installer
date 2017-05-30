@@ -18,17 +18,18 @@ class DependencyInstaller
     /**
      * @var array
      */
-    private $composerDefinition;
+    private $definition;
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $composerFile             = Factory::getComposerFile();
-        $composerJson             = new JsonFile($composerFile);
-        $this->composerDefinition = $composerJson->read();
+        $composerFile     = Factory::getComposerFile();
+        $composerJson     = new JsonFile($composerFile);
+        $this->definition = $composerJson->read();
     }
+
     /**
      * Install a repository.
      *
@@ -40,10 +41,7 @@ class DependencyInstaller
      */
     public function installRepository(string $name, string $type, string $url)
     {
-        if (array_key_exists(
-            $name,
-            $this->composerDefinition['repositories']
-        )) {
+        if (array_key_exists($name, $this->definition['repositories'])) {
             return;
         }
 
@@ -81,7 +79,7 @@ class DependencyInstaller
      */
     public function installPackage(string $package)
     {
-        if (in_array($package, $this->composerDefinition['require-dev'])) {
+        if (in_array($package, $this->definition['require-dev'])) {
             return;
         }
 
