@@ -27,7 +27,7 @@
   "prefer-stable": true,
   "require": {
     "php": "^7.0",
-    "composer/composer": "@stable"
+    "composer/composer": "<2.0.0"
   },
   "require-dev": {
     "mediact/testing-suite": "@stable",
