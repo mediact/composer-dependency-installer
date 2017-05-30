@@ -1,47 +1,51 @@
 {
-  "name": "mediact/composer-dependency-installer",
-  "description": "Install Composer dependencies.",
-  "type": "library",
-  "license": "proprietary",
-  "authors": [
-    {
-      "name": "MediaCT",
-      "email": "contact@mediact.nl"
+    "name": "mediact/composer-dependency-installer",
+    "description": "Install Composer dependencies.",
+    "type": "library",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "MediaCT",
+            "email": "contact@mediact.nl"
+        },
+        {
+            "name": "Klaas Sangers",
+            "role": "developer"
+        },
+        {
+            "name": "Jan-Marten de Boer",
+            "role": "developer"
+        }
+    ],
+    "repositories": {
+        "0": {
+            "type": "composer",
+            "url": "https://composer.mediact.nl"
+        },
+        "mediact": {
+            "type": "composer",
+            "url": "https://composer.mediact.nl"
+        }
     },
-    {
-      "name": "Klaas Sangers",
-      "role": "developer"
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.0",
+        "composer/composer": "<2.0.0"
     },
-    {
-      "name": "Jan-Marten de Boer",
-      "role": "developer"
+    "require-dev": {
+        "phpunit/phpunit": "@stable",
+        "mediact/testing-suite": "@stable",
+        "kint-php/kint": "@stable"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mediact\\Composer\\DependencyInstaller\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mediact\\Composer\\DependencyInstaller\\Tests\\": "tests"
+        }
     }
-  ],
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://composer.mediact.nl"
-    }
-  ],
-  "minimum-stability": "stable",
-  "prefer-stable": true,
-  "require": {
-    "php": "^7.0",
-    "composer/composer": "@stable"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "@stable",
-    "mediact/testing-suite": "@stable",
-    "kint-php/kint": "@stable"
-  },
-  "autoload": {
-    "psr-4": {
-      "Mediact\\Composer\\DependencyInstaller\\": "src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Mediact\\Composer\\DependencyInstaller\\Tests\\": "tests"
-    }
-  }
 }
