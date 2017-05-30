@@ -64,23 +64,20 @@ class DependencyInstaller
             $definition
         );
 
-        //$configCommand->setComposer($this->composer);
-        //$configCommand->setApplication($application);
-        //$configCommand->setIO($this->io);
         $application->run($input);
     }
 
     /**
      * Install a composer package.
      *
-     * @param string $package
+     * @param string $name
      * @param string $version
      *
      * @return void
      */
-    public function installPackage(string $package, string $version)
+    public function installPackage(string $name, string $version)
     {
-        if (in_array($package, $this->definition['require-dev'])) {
+        if (array_key_exists($name, $this->definition['require-dev'])) {
             return;
         }
 
@@ -94,7 +91,7 @@ class DependencyInstaller
         $input = new ArrayInput(
             [
                 'command' => 'require',
-                'packages' => [$package . ':' . $version],
+                'packages' => [$name . ':' . $version],
                 '--dev' => true,
                 '--no-scripts' => true,
                 '--no-interaction' => true,
@@ -103,9 +100,6 @@ class DependencyInstaller
             $definition
         );
 
-        //$requireCommand->setComposer($this->composer);
-        //$requireCommand->setApplication($application);
-        //$requireCommand->setIO($this->io);
         $application->run($input);
     }
 }
