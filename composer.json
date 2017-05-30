@@ -30,18 +30,12 @@
     "composer/composer": "@stable"
   },
   "require-dev": {
-    "phpunit/phpunit": "@stable",
     "mediact/testing-suite": "@stable",
     "kint-php/kint": "@stable"
   },
   "autoload": {
     "psr-4": {
       "Mediact\\Composer\\DependencyInstaller\\": "src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Mediact\\Composer\\DependencyInstaller\\Tests\\": "tests"
     }
   }
 }
