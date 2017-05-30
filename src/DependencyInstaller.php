@@ -25,6 +25,7 @@ class DependencyInstaller
      * @var string
      */
     private $workingDir;
+
     /**
      * @var null|OutputInterface
      */
