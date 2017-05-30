@@ -74,10 +74,11 @@ class DependencyInstaller
      * Install a composer package.
      *
      * @param string $package
+     * @param string $version
      *
      * @return void
      */
-    public function installPackage(string $package)
+    public function installPackage(string $package, string $version)
     {
         if (in_array($package, $this->definition['require-dev'])) {
             return;
@@ -93,7 +94,7 @@ class DependencyInstaller
         $input = new ArrayInput(
             [
                 'command' => 'require',
-                'packages' => [$package . ':@stable'],
+                'packages' => [$package . ':' . $version],
                 '--dev' => true,
                 '--no-scripts' => true,
                 '--no-interaction' => true,
