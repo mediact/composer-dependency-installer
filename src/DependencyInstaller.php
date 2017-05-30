@@ -12,6 +12,7 @@ use Composer\Console\Application;
 use Composer\Factory;
 use Composer\Json\JsonFile;
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class DependencyInstaller
 {
@@ -21,13 +22,29 @@ class DependencyInstaller
     private $definition;
 
     /**
-     * Constructor.
+     * @var string
      */
-    public function __construct()
-    {
-        $composerFile     = Factory::getComposerFile();
+    private $workingDir;
+    /**
+     * @var null|OutputInterface
+     */
+    private $output;
+
+    /**
+     * Constructor.
+     *
+     * @param string|null          $composerFile
+     * @param OutputInterface|null $output
+     */
+    public function __construct(
+        string $composerFile = null,
+        OutputInterface $output = null
+    ) {
+        $composerFile     = $composerFile ?: Factory::getComposerFile();
         $composerJson     = new JsonFile($composerFile);
         $this->definition = $composerJson->read();
+        $this->workingDir = dirname($composerFile);
+        $this->output     = $output;
     }
 
     /**
@@ -41,7 +58,9 @@ class DependencyInstaller
      */
     public function installRepository(string $name, string $type, string $url)
     {
-        if (array_key_exists($name, $this->definition['repositories'])) {
+        if (array_key_exists('repositories', $this->definition)
+            && array_key_exists($name, $this->definition['repositories'])
+        ) {
             return;
         }
 
@@ -59,12 +78,14 @@ class DependencyInstaller
                 'setting-value' => [
                     $type,
                     $url
-                ]
+                ],
+                '--working-dir' => $this->workingDir
             ],
             $definition
         );
 
-        $application->run($input);
+        $application->setAutoExit(false);
+        $application->run($input, $this->output);
     }
 
     /**
@@ -72,12 +93,19 @@ class DependencyInstaller
      *
      * @param string $name
      * @param string $version
+     * @param bool   $dev
      *
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
-    public function installPackage(string $name, string $version)
+    public function installPackage(string $name, string $version, bool $dev = true)
     {
-        if (array_key_exists($name, $this->definition['require-dev'])) {
+        $node = $dev ? 'require-dev' : 'require';
+
+        if (array_key_exists($node, $this->definition)
+            && array_key_exists($name, $this->definition[$node])
+        ) {
             return;
         }
 
@@ -92,14 +120,16 @@ class DependencyInstaller
             [
                 'command' => 'require',
                 'packages' => [$name . ':' . $version],
-                '--dev' => true,
+                '--dev' => $dev,
                 '--no-scripts' => true,
                 '--no-interaction' => true,
                 '--no-plugins' => true,
+                '--working-dir' => $this->workingDir
             ],
             $definition
         );
 
-        $application->run($input);
+        $application->setAutoExit(false);
+        $application->run($input, $this->output);
     }
 }
