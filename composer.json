@@ -17,16 +17,6 @@
             "role": "developer"
         }
     ],
-    "repositories": {
-        "0": {
-            "type": "composer",
-            "url": "https://composer.mediact.nl"
-        },
-        "mediact": {
-            "type": "composer",
-            "url": "https://composer.mediact.nl"
-        }
-    },
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
