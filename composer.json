@@ -2,7 +2,7 @@
     "name": "mediact/composer-dependency-installer",
     "description": "Install Composer dependencies.",
     "type": "library",
-    "license": "proprietary",
+    "license": "MIT",
     "authors": [
         {
             "name": "MediaCT",
