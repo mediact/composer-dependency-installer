@@ -21,11 +21,11 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.0",
-        "composer/composer": "<2.0.0"
+        "composer/composer": "^2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "@stable",
-        "mediact/testing-suite": "@stable",
+        "mediact/testing-suite": "dev-feature/support-composer-v2",
         "kint-php/kint": "@stable"
     },
     "autoload": {
