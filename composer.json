@@ -21,7 +21,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.0",
-        "composer/composer": "^1.0 || ^2.0"
+        "composer/composer": "^2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "@stable",
