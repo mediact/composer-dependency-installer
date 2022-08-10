@@ -18,6 +18,7 @@
         }
     ],
     "minimum-stability": "stable",
+    "abandoned": "youwe/composer-dependency-installer",
     "prefer-stable": true,
     "require": {
         "php": "^7.0",
